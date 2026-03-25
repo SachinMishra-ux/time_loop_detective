@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+server.py
+requirements.txt
+*.pyc
+.DS_Store

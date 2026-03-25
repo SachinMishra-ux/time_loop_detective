@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Loop Detective: The Trilogy</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Menu -->
+    <div id="start-screen" class="screen active">
+        <div class="title-container">
+            <h1>Time Loop Detective</h1>
+            <p class="subtitle">Orchestrate the perfect timeline across 3 cases.</p>
+        </div>
+        <div class="instructions">
+            <h3>Investigation Protocols:</h3>
+            <ul>
+                <li>The timeline loops every 5 in-game minutes.</li>
+                <li>Everything resets, except your memories.</li>
+                <li>Watch the map closely. Characters move in real-time.</li>
+                <li>Interact, collect items, and alter destiny.</li>
+            </ul>
+        </div>
+        <button id="btn-enter-hub" class="btn-primary">ENTER DETECTIVE BUREAU</button>
+        <button id="btn-wipe" class="btn-danger">Wipe Memories</button>
+    </div>
+
+    <!-- Hub (Level Select and Rewards) -->
+    <div id="hub-screen" class="screen">
+        <div class="title-container">
+            <h2>The Detective's Bureau</h2>
+        </div>
+        
+        <div class="rewards-section">
+            <h3 style="color:#fff; text-align:center;">Your Badges</h3>
+            <div id="badges-container" class="badges">
+                <!-- Badges populated by JS -->
+            </div>
+        </div>
+
+        <div class="cases-section">
+            <h3>Select a Case</h3>
+            <div id="cases-container" class="cases">
+                <!-- Cases populated by JS -->
+            </div>
+        </div>
+        <button id="btn-hub-back" class="btn-secondary" style="margin-top:20px;">Back to Title</button>
+    </div>
+
+    <!-- The Game UI -->
+    <div id="game-screen" class="screen">
+        <div class="top-bar">
+            <div class="time-display">
+                <span id="loop-counter">Loop: 1</span>
+                <span id="clock">0:00</span>
+            </div>
+            <div class="controls">
+                <button id="btn-sound" class="btn-secondary">🔊 Sound: ON</button>
+                <button id="btn-fast-forward" class="btn-secondary">Fast Forward ⏩</button>
+                <button id="btn-restart-loop" class="btn-danger">Restart Loop 🔁</button>
+                <button id="btn-exit-case" class="btn-secondary" style="margin-left:20px;">Exit Case</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Panel: Scene & Inventory -->
+            <div class="panel side-panel left-panel">
+                <h2 id="current-room-name" class="room-title">Loading...</h2>
+                <div id="scene-description" class="scene-desc"></div>
+                
+                <div class="scene-entities">
+                    <!-- Actions -->
+                    <h4>Actions & Investigations:</h4>
+                    <div id="action-buttons" class="entity-list">
+                    </div>
+                </div>
+
+                <div class="inventory-section">
+                    <h4>Inventory:</h4>
+                    <ul id="inventory-list">
+                        <li class="empty-msg">Empty hands.</li>
+                    </ul>
+                </div>
+                
+                <div id="event-log-container">
+                    <h4>Timeline Log</h4>
+                    <div id="event-log"></div>
+                </div>
+            </div>
+
+            <!-- Center Panel: The Dynamic Map -->
+            <div class="panel map-panel">
+                <div id="mansion-wrapper">
+                    <!-- The floorplan background (rooms injected by JS) -->
+                    <div id="floorplan"></div>
+                    <!-- The canvas for path lines -->
+                    <canvas id="map-canvas"></canvas>
+                    <!-- Character tokens -->
+                    <div id="tokens-layer"></div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Detective's Notebook -->
+            <div class="panel side-panel right-panel">
+                <h3 class="notebook-title">Detective Notebook</h3>
+                <div class="notebook-section">
+                    <h4>Memories / Clues</h4>
+                    <ul id="clues-list">
+                        <li class="empty-msg">No clues discovered yet.</li>
+                    </ul>
+                </div>
+                <!-- Mini legend for character colors -->
+                <div class="notebook-section">
+                    <h4>Suspect List</h4>
+                    <ul id="suspects-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="hidden">
+        <div class="modal">
+            <h3 id="modal-title">Observation</h3>
+            <p id="modal-content">Text goes here...</p>
+            <button id="btn-close-modal" class="btn-primary">Close</button>
+        </div>
+    </div>
+
+    <!-- End of Case Screen -->
+    <div id="end-screen" class="screen">
+        <h1 id="end-title">Case Closed</h1>
+        <p id="end-desc">You altered the timeline!</p>
+        
+        <div id="new-badge-notification" class="badge-notification">
+            <h3>New Badge Earned!</h3>
+            <div id="earned-badge" class="badge-icon"></div>
+            <p id="earned-badge-name"></p>
+        </div>
+
+        <div class="end-stats">
+            <p>Loops Taken: <span id="stat-loops">1</span></p>
+        </div>
+        <button id="btn-play-again" class="btn-primary">Return to Bureau</button>
+    </div>
+
+    <script src="static/game.js"></script>
+</body>
+</html>
