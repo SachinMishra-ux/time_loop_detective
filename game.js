@@ -948,4 +948,30 @@ document.getElementById('btn-play-again').addEventListener('click', () => {
   loadSave(); renderHub(); switchScreen('hub-screen');
 });
 
+// ==================== SOCIAL MEDIA SHARING ====================
+
+const GAME_URL = 'https://sachinmishra-ux.github.io/time_loop_detective/';
+
+function getShareText() {
+  const c = currentCase();
+  return `🕵️ I just earned the "${c.badge.name}" badge in Time Loop Detective! ${c.badge.icon} ${c.badge.desc} Can you solve the mystery? 🔍`;
+}
+
+document.getElementById('share-x').addEventListener('click', () => {
+  const text = encodeURIComponent(getShareText());
+  const url = encodeURIComponent(GAME_URL);
+  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'noopener');
+});
+
+document.getElementById('share-linkedin').addEventListener('click', () => {
+  const url = encodeURIComponent(GAME_URL);
+  const text = encodeURIComponent(getShareText());
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`, '_blank', 'noopener');
+});
+
+document.getElementById('share-facebook').addEventListener('click', () => {
+  const url = encodeURIComponent(GAME_URL);
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${encodeURIComponent(getShareText())}`, '_blank', 'noopener');
+});
+
 loadSave();
